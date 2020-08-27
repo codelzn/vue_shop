@@ -48,7 +48,7 @@
             type="danger"
             icon="el-icon-delete"
             size="mini"
-            @click="deleteCate(scope.row.id)"
+            @click="deleteCate(scope.row.cat_id)"
           >删除</el-button>
         </template>
       </tree-table>
@@ -141,7 +141,7 @@ export default {
         cat_pid: 0,
         cat_level: 0
       },
-      total: 30,
+      total: 0,
       // 添加分类的表单验证规则对象
       addCateFormRules: {
         cat_name: [
@@ -177,6 +177,7 @@ export default {
       }
       // 将数据赋值给cateList
       this.cateList = res.data
+      this.total = res.data.length
     },
     handleSizeChange (newSize) {
       this.queryInfo.pagesize = newSize
@@ -254,6 +255,7 @@ export default {
       if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除用户')
       }
+      console.log(id)
       const { data: res } = await this.$http.delete('categories/' + id)
       if (res.meta.status !== 200) {
         return this.$message.error('分类删除失败')
