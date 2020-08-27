@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
+import TreeTable from 'vue-table-with-tree-grid'
 
 // 导入字体图标
 import './assets/fonts/iconfont.css'
@@ -12,8 +13,10 @@ import './assets/css/global.css'
 
 // 导入axios
 import axios from 'axios'
+Vue.component('tree-table', TreeTable)
 // 配置请求根路径
-axios.defaults.baseURL = 'http://112.124.12.46/api/private/v1/'
+// axios.defaults.baseURL = 'http://112.124.12.46/api/private/v1/'
+axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1'
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
